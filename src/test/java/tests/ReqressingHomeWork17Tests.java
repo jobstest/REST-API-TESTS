@@ -107,5 +107,4 @@ public class ReqressingHomeWork17Tests extends TestBase {
                 .statusCode(400)
                 .body("error", is("Missing password"));
     }
-
 }
