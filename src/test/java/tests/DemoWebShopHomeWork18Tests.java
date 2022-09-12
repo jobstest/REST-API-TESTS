@@ -23,7 +23,6 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
     void loginWithApiAndCustomListenerTest() {
         step("Получение куки авторизации через обращение к эндпоинту", () -> {
             String authCookiesValue = given()
-                    .filter(withCustomTemplates())
                     .contentType("application/x-www-form-urlencoded")
                     .formParam("Email", login)
                     .formParam("Password", password)
@@ -38,8 +37,8 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
 
             step("Открытие браузера с легковесным изображением для добавления куки авторизации", () ->
                     open("/Themes/DefaultClean/Content/images/logo.png"));
-            Cookie authCookie = new Cookie(authCookieName, authCookiesValue);
-            WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
+                    Cookie authCookie = new Cookie(authCookieName, authCookiesValue);
+                    WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
 
         });
 
@@ -99,8 +98,5 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
             open(baseUrl + "/cart");
             $(".product").shouldHave(text("Computing and Internet"));
         });
-
     }
-
-
 }
