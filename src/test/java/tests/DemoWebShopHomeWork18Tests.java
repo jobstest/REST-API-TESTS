@@ -58,7 +58,7 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
                     .get("/141-inch-laptop")
                     .then()
                     .statusCode(200)
-                    .extract().cookie(viewedCookie);
+                    .extract().cookie(viewedCookie).substring(25);
         });
 
         step("Открытие страницы с легковесным изображением и добавление куки товара к сравнению", () -> {
@@ -71,32 +71,6 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
         step("Проверка товара", () -> {
             open(baseUrl + "/compareproducts");
             $(".product-name").shouldHave(text("14.1-inch Laptop"));
-        });
-    }
-
-    @Test
-    @DisplayName("Добавление товара в Shopping cart")
-    void addProductToShoppingCart() {
-        step("Получение id товара через запрос к его странице", () -> {
-            productId = given()
-                    .when()
-                    .log().all()
-                    .get("/computing-and-internet")
-                    .then()
-                    .statusCode(200)
-                    .extract().cookie(viewedCookie);
-        });
-
-        step("Открытие страницы с легковесным изображением и добавление куки товара к сравнению", () -> {
-            open(baseUrl + "/Themes/DefaultClean/Content/images/logo.png");
-            Cookie compareCookie = new Cookie(compareListCookieName, compareListCookie + productId);
-            WebDriverRunner.getWebDriver().manage().addCookie(compareCookie);
-            refresh();
-        });
-
-        step("Проверка товара", () -> {
-            open(baseUrl + "/cart");
-            $(".product").shouldHave(text("Computing and Internet"));
         });
     }
 }
