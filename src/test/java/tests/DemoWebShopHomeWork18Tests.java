@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
@@ -12,6 +13,7 @@ import static helpers.AllureRestAssuredFilter.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
+@Tag("api_test")
 public class DemoWebShopHomeWork18Tests extends TestBase {
 
     String productId;
