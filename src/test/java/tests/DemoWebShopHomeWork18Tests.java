@@ -36,9 +36,9 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
         });
 
         step("Открытие браузера с легковесным изображением для добавления куки авторизации", () -> {
-                open("/Themes/DefaultClean/Content/images/logo.png");
-                Cookie authCookie = new Cookie(cookieAuthName, authCookiesValue);
-                WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
+            open("/Themes/DefaultClean/Content/images/logo.png");
+            Cookie authCookie = new Cookie(cookieAuthName, authCookiesValue);
+            WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
         });
 
 

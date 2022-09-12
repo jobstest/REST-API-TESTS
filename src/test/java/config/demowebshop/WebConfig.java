@@ -4,8 +4,7 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "classpath:properties/api_credential.properties"
-})
+        "classpath:properties/credential.properties"})
 public interface WebConfig extends Config{
 
     @Key("userLogin")
