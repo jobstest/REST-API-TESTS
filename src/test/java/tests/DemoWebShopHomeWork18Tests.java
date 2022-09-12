@@ -22,7 +22,7 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
     @Test
     @DisplayName("Успешная авторизация в demowebshop (API + UI)")
     void loginTest() {
-        step("Получение куки авторизации через обращение к эндпоинту", () -> {
+        step("Получение куки авторизации", () -> {
             authCookiesValue = given()
                     .contentType("application/x-www-form-urlencoded")
                     .formParam("Email", login)
@@ -32,12 +32,12 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
                     .post("/login")
                     .then()
                     .statusCode(302)
-                    .extract().cookie(authCookieName);
+                    .extract().cookie(cookieAuthName);
         });
 
         step("Открытие браузера с легковесным изображением для добавления куки авторизации", () -> {
                 open("/Themes/DefaultClean/Content/images/logo.png");
-                Cookie authCookie = new Cookie(authCookieName, authCookiesValue);
+                Cookie authCookie = new Cookie(cookieAuthName, authCookiesValue);
                 WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
         });
 

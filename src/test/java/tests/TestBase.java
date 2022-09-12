@@ -19,7 +19,7 @@ public class TestBase {
 
     static String login;
     static String password;
-    String authCookieName = "NOPCOMMERCE.AUTH"; //cookie авторизации
+    String cookieAuthName = "NOPCOMMERCE.AUTH"; //cookie авторизации
 
     String viewedCookie = "NopCommerce.RecentlyViewedProducts"; //cookie товара с id
 
