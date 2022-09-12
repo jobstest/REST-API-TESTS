@@ -19,7 +19,7 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
 
     @Test
     @DisplayName("Успешная авторизация в demowebshop (API + UI)")
-    void loginWithApiAndCustomListenerTest() {
+    void loginTest() {
         step("Получение куки авторизации через обращение к эндпоинту", () -> {
             String authCookiesValue = given()
                     .contentType("application/x-www-form-urlencoded")
@@ -29,7 +29,6 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
                     .when()
                     .post("/login")
                     .then()
-                    .log().all()
                     .statusCode(302)
                     .extract().cookie(authCookieName);
 
