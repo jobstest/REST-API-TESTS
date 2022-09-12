@@ -4,7 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import config.demowebshop.ApiConfig;
 import config.demowebshop.WebConfig;
-import helpers.AllureAttachments;
+import helpers.Attachments;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
@@ -14,21 +14,19 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
-public class TestBase {
+public class BaseTest {
 
     static String login;
     static String password;
-    String cookieAuthName = "NOPCOMMERCE.AUTH"; //cookie авторизации
 
-    String viewedCookie = "NopCommerce.RecentlyViewedProducts"; //cookie товара с id
-
-    String compareListCookieName = "nop.CompareProducts"; // cookie страницы Compare products
-
-    String compareListCookie = "CompareProductIds="; // cookie товара на странице Compare products равному id
-
+    String cookieAuthName = "NOPCOMMERCE.AUTH";
+    String compareListCookieName = "nop.CompareProducts";
+    String viewedCookie = "NopCommerce.RecentlyViewedProducts";
+    String compareListCookie = "CompareProductIds=";
 
     @BeforeAll
-    static void beforeAll() {
+    static void config() {
+
         SelenideLogger.addListener("allure", new AllureSelenide());
 
         WebConfig webConfig = ConfigFactory.create(WebConfig.class, System.getProperties());
@@ -39,7 +37,7 @@ public class TestBase {
         ApiConfig apiConfig = ConfigFactory.create(ApiConfig.class, System.getProperties());
 
         RestAssured.baseURI = apiConfig.baseURI();
-        Configuration.baseUrl = webConfig.baseUrl();
+        Configuration.baseUrl = webConfig.basebUrl();
 
         String remote = apiConfig.server();
         String remoteUser = apiConfig.remoteUser();
@@ -52,13 +50,12 @@ public class TestBase {
         Configuration.browserCapabilities = capabilities;
     }
 
-
     @AfterEach
-    public void afterEach() {
-        AllureAttachments.screenshotAs("Screenshot");
-        AllureAttachments.pageSource();
-        AllureAttachments.browserConsoleLogs();
-        AllureAttachments.addVideo();
+    void addAttachments() {
+        Attachments.screenshotAs("Screenshot");
+        Attachments.pageSource();
+        Attachments.browserConsoleLogs();
+        Attachments.addVideo();
         closeWebDriver();
     }
 }

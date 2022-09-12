@@ -7,7 +7,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class ReqressingHomeWork17Tests extends TestBase {
+public class ReqressingHomeWork17Tests extends BaseTest {
 
     @Test
     void registerSuccesfulTest() {

@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -13,21 +14,22 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
 @Tag("api_test")
-public class DemoWebShopHomeWork18Tests extends TestBase {
+public class DemoWebShopHomeWork18Tests extends BaseTest {
 
+
+    String authCookieValue;
     String productId;
 
-    String authCookiesValue;
-
     @Test
-    @DisplayName("Успешная авторизация в demowebshop (API + UI)")
-    void loginTest() {
-        step("Получение куки авторизации", () -> {
-            authCookiesValue = given()
+    public void loginTest(){
+
+        step("Получение куки авторизации через обращение к эндпоинту", () -> {
+            authCookieValue = given()
                     .contentType("application/x-www-form-urlencoded")
                     .formParam("Email", login)
                     .formParam("Password", password)
-                    .log().all()
+                    .log().uri()
+                    .log().params()
                     .when()
                     .post("/login")
                     .then()
@@ -36,11 +38,10 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
         });
 
         step("Открытие браузера с легковесным изображением для добавления куки авторизации", () -> {
-            open("/Themes/DefaultClean/Content/images/logo.png");
-            Cookie authCookie = new Cookie(cookieAuthName, authCookiesValue);
+            Selenide.open("/Themes/DefaultClean/Content/images/logo.png");
+            Cookie authCookie = new Cookie(cookieAuthName, authCookieValue);
             WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
         });
-
 
         step("Проверка авторизации в браузере", () -> {
             open(baseUrl);
@@ -49,13 +50,13 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
     }
 
     @Test
-    @DisplayName("Добавление товара в Compare products")
-    void addProductToCompareList() {
-        step("Получение id товара через запрос к его странице", () -> {
+    public void addProductsToCompareList(){
+
+        step("Получение id товара через запрос к эндпоинту", () -> {
             productId = given()
                     .when()
                     .log().all()
-                    .get("/141-inch-laptop")
+                    .get("/build-your-cheap-own-computer")
                     .then()
                     .statusCode(200)
                     .extract().cookie(viewedCookie).substring(25);
@@ -68,9 +69,9 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
             refresh();
         });
 
-        step("Проверка товара", () -> {
+        step("Проверка списка товаров к сравнению", () -> {
             open(baseUrl + "/compareproducts");
-            $(".product-name").shouldHave(text("14.1-inch Laptop"));
+            $(".product-name").shouldHave(text("Build your own cheap computer"));
         });
     }
 }
