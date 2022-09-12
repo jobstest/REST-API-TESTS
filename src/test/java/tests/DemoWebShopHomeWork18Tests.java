@@ -9,7 +9,6 @@ import org.openqa.selenium.Cookie;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.*;
-import static helpers.AllureRestAssuredFilter.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
@@ -37,8 +36,8 @@ public class DemoWebShopHomeWork18Tests extends TestBase {
 
             step("Открытие браузера с легковесным изображением для добавления куки авторизации", () ->
                     open("/Themes/DefaultClean/Content/images/logo.png"));
-                    Cookie authCookie = new Cookie(authCookieName, authCookiesValue);
-                    WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
+            Cookie authCookie = new Cookie(authCookieName, authCookiesValue);
+            WebDriverRunner.getWebDriver().manage().addCookie(authCookie);
 
         });
 
