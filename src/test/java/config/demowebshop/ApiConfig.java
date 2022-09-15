@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "classpath:api_credential.properties"})
+        "classpath:properties/api_credential.properties"})
 
 public interface ApiConfig extends Config {
 

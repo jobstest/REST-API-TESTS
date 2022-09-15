@@ -51,7 +51,6 @@ public class DemoWebShopHomeWork18Tests extends BaseTest {
     }
 
     @Test
-    @Disabled
     public void addProductsToCompareList(){
 
         step("Получение id товара через запрос к эндпоинту", () -> {
