@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -50,6 +51,7 @@ public class DemoWebShopHomeWork18Tests extends BaseTest {
     }
 
     @Test
+    @Disabled
     public void addProductsToCompareList(){
 
         step("Получение id товара через запрос к эндпоинту", () -> {

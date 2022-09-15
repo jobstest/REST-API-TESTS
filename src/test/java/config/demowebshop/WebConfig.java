@@ -15,6 +15,7 @@ public interface WebConfig extends Config {
     String password();
 
     @Key("baseUrl")
+    @DefaultValue("https://demowebshop.tricentis.com/")
     String basebUrl();
 
     @Key("browser")
