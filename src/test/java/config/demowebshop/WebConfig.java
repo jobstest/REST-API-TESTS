@@ -17,20 +17,4 @@ public interface WebConfig extends Config {
     @Key("baseUrl")
     @DefaultValue("https://demowebshop.tricentis.com/")
     String basebUrl();
-
-    @Key("browser")
-    @DefaultValue("CHROME")
-    String browser();
-
-    @Key("browser.version")
-    @DefaultValue("104.0")
-    String browserVersion();
-
-    @Key("browser.size")
-    @DefaultValue("1920x1080")
-    String browserSize();
-
-    @Key("browser.position")
-    @DefaultValue("0x0")
-    String browserPosition();
 }
